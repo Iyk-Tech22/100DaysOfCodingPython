@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import requests
-from flask import Flask, render_template
+from sendmail import SendMail
+from flask import Flask, render_template, request
 
 api_endpoint = "https://api.npoint.io/1bfdbd4fe4fc82cf75f4"
 res = requests.get(url=api_endpoint)
@@ -22,9 +23,18 @@ def post(id):
 def about():
     return render_template("about.html")
 
-@app.route("/contact")
+@app.route("/contact", methods=["get", "post"])
 def contact():
-    return render_template("contact.html")
+    method = request.method
+    if request.method == "POST":
+        message = f"""
+            Name: {request.form['name']}
+            Email: {request.form['email']}
+            Number: {request.form['num']}
+            Message: {request.form['text']}
+        """
+        SendMail(msg=message)
+    return render_template("contact.html", method_type=method)
 
 if __name__ == "__main__":
     app.run(debug=True)
