@@ -1,16 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, URLField
-from wtforms.validators DataRequired
+from wtforms import StringField, URLField, SubmitField
+from wtforms.validators import DataRequired
 
 class CafeForm(FlaskForm):
     """ Defines Form Fields """
-    cafe_name = StringField(label="Cafe Name", validate=[DataRequired()])
-    location = StringField(label="Cafe Location Google Map(URL)", validate=[DataRequired()])
-    _open = StringField(label="Opening Time (8AM)", validate=[DataRequired()])
-    close = StringField(label="Close Time (8PM)", validate=[DataRequired()])
-    rating = StringField(label="Coffe Rating", validate=[DataRequired()])
-    wifi = StringField(label="Wifi Strength Rating", validate=[DataRequired()])
-    power = StringField(label="Power Socket Rating", validate=[DataRequired()])
-    submit = StringField(label="Submit", validate=[DataRequired()])
+    CafeName = StringField("Cafe Name",  validators=[DataRequired()])
+    Location = StringField("Cafe Location Google Map(URL)", [DataRequired()])
+    Open = StringField("Opening Time (8AM)",  validators=[DataRequired()])
+    Close = StringField("Close Time (8PM)",  validators=[DataRequired()])
+    CoffeeRate = StringField("Coffe Rating",  validators=[DataRequired()])
+    WifiRate = StringField("Wifi Strength Rating",  validators=[DataRequired()])
+    PowerRate = StringField("Power Socket Rating",  validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 
